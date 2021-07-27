@@ -1,8 +1,10 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Length, Email, EqualTo
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 # make sure that the field is not empty ^
 # specifying the range of chars to be used in the input -> Length
+# wtforms is used for working with forms in flask
+from main_flask.models import User
 
 
 class RegistrationForm(FlaskForm):
@@ -25,6 +27,25 @@ class RegistrationForm(FlaskForm):
     # the submit button
     submit = SubmitField("Join Us")
 
+    #!!! creating a custom validation
+    #!!! def validate_field(self, field):
+    #!!!     if True:
+    #!!!         raise ValidationError('Validation Message')
+    #!!! ^ a template for our validation methods
+
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        
+        if user:
+            raise ValidationError('Existing username is passed, please consider another one!')
+
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        
+        if user:
+            raise ValidationError('Existing email is passed, please consider another one!')
+
 
 class LoginForm(FlaskForm):
 
@@ -36,6 +57,3 @@ class LoginForm(FlaskForm):
     remember = BooleanField("Remember Me")
     # the submit button
     submit = SubmitField("Login")
-
-# ! we need to put a secret key for our application --> protects modifying cookies, avoid forgery attacks
-# ^ we need to put that in the app file
