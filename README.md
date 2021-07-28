@@ -3,4 +3,5 @@
 <ul>
   <li>Thru the Galaxy (PyGame)
   <li>Blog Posting Site (Flask)
+  <li>Manipulation of the Matplotlib
 <ul>
