@@ -1,9 +1,10 @@
+from operator import pos
 import secrets
 # ^ for creating a random hex
 import os
 # ^ for getting an extension
 from PIL import Image
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, abort
 from main_flask import app, db, bcrypt
 from main_flask.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
 from main_flask.models import User, Post
@@ -18,7 +19,13 @@ from flask_login import login_user, current_user, logout_user, login_required
 # that will be shown on our website for this specific route
 # / is the root page
 def home():
-    posts = Post.query.all()
+    page = request.args.get('page', 1, type=int)
+    # ^ getting the page specified from the query parameter in the URL
+    # page is also the optional parameter in the URL
+    # 1 -> default page
+    # if non-int is passed, then there appears an error
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page = page ,per_page = 5)
+    # ^ order when querying and paginate
     return render_template('home_temp.html', posts=posts)
 # we intend to return the html template in this func
 # we would render the template
@@ -141,4 +148,70 @@ def new_post():
         db.session.commit()
         flash('The post has been shared successfully!', 'success')
         return redirect(url_for('home'))
-    return render_template('create_post.html', title = 'New Post', form = form)
+    return render_template('create_post.html', 
+    title = 'New Post', form = form, legend = 'New Post')
+
+@app.route('/post/<int:post_id>')
+# putting a variable into ^ the url
+# we have said that we expect that to be an int
+def post(post_id):
+    post = Post.query.get_or_404(post_id)
+    # ^ gives the post page but if that doesn't exist, then give me 404
+    return render_template("post.html", title = 'Post ⚙', post = post)
+
+
+@app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
+@login_required
+def update_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+        # aborting an HTTP response for the forbidden route
+    else:
+        form = PostForm()
+        form.submit.data = "Update"
+        if form.validate_on_submit():
+            post.title = form.title.data
+            post.content = form.content.data 
+            db.session.commit()
+            flash('The post has been modified!', 'success')
+            return redirect(url_for('post', post_id = post.id))
+        elif request.method == 'GET':
+            form.title.data = post.title
+            form.content.data = post.content
+        return render_template('create_post.html', 
+        title = 'Update Post 📤', form = form, legend = 'Update Post')
+
+
+@app.route("/post/<int:post_id>/delete", methods=['POST'])
+@login_required # only accept the POST coz we would accept when submitted from the modal
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash('The post has been deleted', 'success')
+    return redirect(url_for('home'))
+
+
+@app.route("/user/<string:username>")
+def user_posts(username):
+    page = request.args.get('page', 1, type=int)
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = Post.query.filter_by(author=user)\
+        .order_by(Post.date_posted.desc())\
+        .paginate(page = page ,per_page = 5)    
+    return render_template('user_posts.html', posts=posts, user=user)
+
+
+
+
+
+
+
+
+
+
+
+
