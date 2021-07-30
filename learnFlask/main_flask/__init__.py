@@ -1,42 +1,21 @@
-import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager, login_manager
-# from flask_mail import Mail
+from flask_login import LoginManager
+from flask_mail import Mail
+from main_flask.config import Config
 
 
-app = Flask(__name__)
-# we instanciated the flask app in the "app" variable
 # setting up a secret key
-app.config["SECRET_KEY"] = 'c647aaa08100111e2cf2b392828dbc0f'
-# ^ .config -- the configuration dictionary
-# ^ could be set as an env var
-# ^ The secret key is needed to keep the client-side sessions secure. You can generate some random key
-# ^ # ! we need to put a secret key for our application --> protects modifying cookies, avoid forgery attacks
-app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///site.db'
-# /// are relative paths from the current file via sqlite
-db = SQLAlchemy(app)
+
+db = SQLAlchemy()
 # ^ setting an instance
-bcrypt = Bcrypt(app)
-login_manager = LoginManager(app)
-login_manager.login_view = 'login'
+bcrypt = Bcrypt()
+login_manager = LoginManager()
+login_manager.login_view = 'users.login'
 # ^ setting the login route   ^ func name of our route like with url_for
 login_manager.login_message_category = 'info'
 # ^ adding a category for msgs
-# app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-# ^ loc of our mail server
-
-# app.config['MAIL_PORT'] = 465
-# port that email is sent thru on our server
-# app.config['MAIL_USE_TLS'] = True
-# ^ for encryption purposes
-# app.config['MAIL_USE_SSL'] = True
-# ^ similar to TLS
-# app.config['MAIL_DEBUG'] = True
-# the real value of ['DEBUG']
-# app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
-# app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
 
 # app.config['MAIL_DEFAULT_SENDER'] = 'demo@sender.com'
 # # ^ adds the sender as 'from' for each email 
@@ -46,6 +25,24 @@ login_manager.login_message_category = 'info'
 
 # app.config['MAIL_ASCII_ATTACHMENTS'] = os.environ.get('EMAIL_PASS')
 
-# mail = Mail(app)
+mail = Mail()
 
-from main_flask import routes
+def create_app(config_class=Config):
+    app = Flask(__name__)
+    app.config.from_object(Config)
+
+    db.init_app(app)
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
+    mail.init_app(app)
+
+    from main_flask.users.routes import users
+    from main_flask.posts.routes import posts
+    from main_flask.main.routes import main
+    from main_flask.errors.handlers import errors
+    # registering imported blueprint 
+    app.register_blueprint(users)
+    app.register_blueprint(posts)
+    app.register_blueprint(main)
+    app.register_blueprint(errors)
+    return app

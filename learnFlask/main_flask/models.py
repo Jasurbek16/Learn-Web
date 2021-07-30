@@ -1,8 +1,8 @@
 from datetime import datetime
-from main_flask import db, login_manager, app
-from sqlalchemy.orm import backref, defaultload, lazyload
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from flask import current_app
+from main_flask import db, login_manager
 from flask_login import UserMixin
-# from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 # ^ would allow us to have required attrs and methods for the login
 
 @login_manager.user_loader # will expect the User model to have some certain attrs and methods
@@ -27,20 +27,20 @@ class User(db.Model, UserMixin):
     # we wouldn't see that posts col
 
     # # Creating a token for a user 
-    # def get_reset_token(self, expires_sec = 1800):
-    #     s = Serializer(app.config['SECRET_KEY'], expires_sec)
-    #     return s.dumps({'user_id': self.id}).decode('utf-8')
+    def get_reset_token(self, expires_sec = 1800):
+        s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
+        return s.dumps({'user_id': self.id}).decode('utf-8')
 
 
     # # For verifying the token
-    # @staticmethod
-    # def verify_reset_token(token):
-    #     s = Serializer(app.config['SECRET_KEY'])
-    #     try:
-    #         user_id = s.loads(token)['user_id']
-    #     except:
-    #         return None
-    #     return User.query.get(user_id)
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
 
 
     def __repr__(self):

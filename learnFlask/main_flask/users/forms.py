@@ -1,13 +1,15 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 # ^ 1st - the type of field , 2nd - validator (for files uploading)
-from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 # make sure that the field is not empty ^
 # specifying the range of chars to be used in the input -> Length
 # wtforms is used for working with forms in flask
+from flask_login import current_user
+
 from main_flask.models import User
+
 
 class RegistrationForm(FlaskForm):
 
@@ -44,7 +46,7 @@ class RegistrationForm(FlaskForm):
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
-        
+    
         if user:
             raise ValidationError('Existing email is passed, please consider another one!')
 
@@ -89,24 +91,18 @@ class UpdateAccountForm(FlaskForm):
                 raise ValidationError('Existing email is passed, please consider another one!')
 
 
-class PostForm(FlaskForm):
-    title = StringField("Title", validators=[DataRequired()])
-    content = TextAreaField("Content", validators=[DataRequired()])
-    submit = SubmitField("Share")
-
-
-# class RequestResetForm(FlaskForm):
-#     email = StringField('Email', validators=[DataRequired(), Email()])
-#     submit = SubmitField('Request Password Reset')
+class RequestResetForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Request Password Reset')
     
-#     def validate_email(self, email):
-#         user = User.query.filter_by(email=email.data).first()
-#         if user is None:
-#             raise ValidationError('Non-existing email is passed. Please, consider registering first!')
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is None:
+            raise ValidationError('Non-existing email is passed. Please, consider registering first!')
 
 
-# class ResetPasswordForm(FlaskForm):
-#     password = PasswordField("Password", validators=[DataRequired()])
-#     confirm_password = PasswordField(
-#         "Confirming the Password", validators=[DataRequired(), EqualTo('password')])
-#     submit = SubmitField('Reset Password')
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField("Password", validators=[DataRequired()])
+    confirm_password = PasswordField(
+        "Confirming the Password", validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Reset Password')
