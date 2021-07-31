@@ -61,6 +61,10 @@ while True:
     rw = RandomWalk(50000)
     rw.fill_walk()
 
+    # Set the size of the plotting window
+    plt.figure(dpi = 141 ,figsize=(10, 6))
+    # ^ controls the width, height, resolution, and background color of the plot
+
     point_numbers = list(range(rw.num_pts))
     # plot according to the moves to see from where to where we went
     plt.scatter(rw.x_vals, rw.y_vals, c=point_numbers,
