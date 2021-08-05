@@ -11,9 +11,13 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
     
     # gets run after our model is saved
-    def save(self):
+    def save(self, *args, **kwargs):
+        # ^ When you are overriding model's save method 
+        # in Django, you should also pass *args 
+        # and **kwargs to overridden method
+        
         # running the save method of our parent class
-        super().save()
+        super().save(*args, **kwargs)
         # would have been run when we save the profile instance anyways
         img = Image.open(self.image.path)
         # ^ would open the image of the current instance

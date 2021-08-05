@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import (LoginRequiredMixin, 
                                         UserPassesTestMixin)
 # LoginRequiredMixin -> makes it possible to be redirected when tried to go to some URL when logged out
 # UserPassesTestMixin -> used for avoiding tries of editing a post created by other users
+from django.contrib.auth.models import User
 from .models import Post
 from django.views.generic import (ListView, 
                                   DetailView, 
@@ -28,6 +29,25 @@ class PostListView(ListView):
     # the variable that we would be loopping over in the template 
     ordering = ['-date_posted']
     # ^ would order the posts from newest to oldest
+    paginate_by = 5
+
+# when we want to see a specified user's posts
+class UserPostListView(ListView):
+    model = Post
+    template_name = 'blog/user_posts.html' # <app>/<model>_<viewtype>/html
+    # ^ specifying which existing template to use
+    context_object_name = 'posts'
+    # ^ is used coz we wanted to change the default name of 
+    # the variable that we would be loopping over in the template 
+    paginate_by = 5
+    
+    # modifying the query set that this list view 
+    # returns
+    def get_queryset(self):
+        user = get_object_or_404(User, username = self.kwargs.get('username'))
+        # ^ getting the username from the URL| kwargs -> query parameters
+        return Post.objects.filter(author = user).order_by('-date_posted')
+    #                                                        ^ would order the posts from newest to oldest
 
 class PostDetailView(DetailView):
     model = Post
