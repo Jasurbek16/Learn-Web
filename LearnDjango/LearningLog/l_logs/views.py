@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+def log_home(request):
+    #The home page
+    return render(request, 'l_logs/l_log_home.html')
