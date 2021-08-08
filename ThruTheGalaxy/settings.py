@@ -13,7 +13,7 @@ class Settings():
         self.ship_limit = 3
 
         # values we’ll need for a new Bullet class
-        self.bullet_width = 500
+        self.bullet_width = 700
         self.bullet_height = 15
         self.bullet_color = 255, 179, 26
         self.bullets_allowed = 3

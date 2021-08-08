@@ -1,0 +1,19 @@
+{% extends 'UTipsApp/base.html' %} {% block content %} {% if topics.count > 1 %}
+<h2>({{ topics.count }}) Topics from {{ subject }}</h2>
+{% else %}
+<h2>({{ topics.count }}) Topic from {{ subject }}</h2>
+{% endif %}
+
+<ul>
+	<br /><br />
+	<hr />
+	{% for topic in topics %}
+	<h4>
+		<a href="{% url 'topic-details' topic.id %}">{{ topic.topic }}</a>
+		<hr />
+	</h4>
+	{% empty %}
+	<li>No Topics Have Been Added Yet ... 😕 {% endfor %}</li>
+</ul>
+
+{% endblock content %}
