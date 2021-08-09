@@ -1,17 +1,21 @@
-{% extends 'UTipsApp/base.html' %} {% block content %} {% for subject in
-subjects %}
-<article class="media content-section">
-	<div class="media-body">
-		<div class="article-metadata">
-			<em><a class="mr-2" href="#">{{ subject.professor }}</a></em>
-		</div>
-		<h3>
-			<a class="article-title" href="{% url 'subject-details' subject.id %}"
-				>{{ subject.name }}</a
-			>
-		</h3>
-	</div>
-</article>
-{% empty %}
-<h2>🙊 Unfortunately, subjects are coming soon...</h2>
-{% endfor %} {% endblock content %}
+{% extends 'UTipsApp/base.html' %}
+{% block link %}
+			<a class="nav-item nav-link" href="{% url 'add-subject' %}">Add Subject</a>
+			<a class="nav-item nav-link" href="{% url 'add-topic' %}">Add Topic</a> 
+{% endblock link %}  
+{% block content %} 
+	{% for subject in subjects %}
+		<article class="media content-section">
+			<div class="media-body">
+				<div class="article-metadata">
+					<em><a class="mr-2" href="#">{{ subject.professor }}</a></em>
+				</div>
+				<h3>
+					<a class="article-title" href="{% url 'subject-details' subject.id %}">{{ subject.name }}</a>
+				</h3>
+			</div>
+		</article>
+	{% empty %}
+		<h2>🙊 Unfortunately, subjects are coming soon...</h2>
+	{% endfor %} 
+	{% endblock content %}

@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.deletion import CASCADE
 from django.utils import timezone
+from django.urls import reverse
 
 
 class Subjects(models.Model):
@@ -15,6 +16,7 @@ class Subjects(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+    
 
 class Info(models.Model):
     # Additional info and the main content
@@ -32,3 +34,9 @@ class Info(models.Model):
             return f"{self.topic[:25]}..."
         else:
             return f"{self.topic}"
+
+    # we'll create get_absolute_url to tell the Django 
+    # how to find a URL to any specific instance 
+    # of the topic
+    def get_absolute_url(self):
+        return reverse('topic-details', kwargs={'pk': self.pk}) # <- returns a full path as a full string

@@ -1,0 +1,22 @@
+{% extends 'UTipsApp/base.html' %} 
+{% block link %}
+	<a class="nav-item nav-link" href="{% url 'edit-topic' topic.id %}">Edit Topic</a>
+{% endblock link %}
+{% block content %} 
+<h2>Topic: {{ topic.topic }}</h2>
+<h3>
+	<a href="{% url 'subject-details' subject.id %}"> ☜ Return to Topics</a>
+</h3>
+<br />
+<ul>
+	<strong>Professor:</strong>
+	<a href="#">{{ subject.professor }}</a>
+	<hr>
+	<strong>Date:</strong>
+		{{ topic.date_shared|date:'M d, Y H:i' }}
+	<hr>
+	<strong>Content:</strong>
+		{{ topic.text|linebreaks }}
+	<hr>
+</ul>
+{% endblock content %}

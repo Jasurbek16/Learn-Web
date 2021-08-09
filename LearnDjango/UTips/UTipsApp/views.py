@@ -1,14 +1,19 @@
 from django.shortcuts import render, redirect
+from django.views.generic import ListView, UpdateView
 from .models import Subjects, Info
-from .forms import AddSubjectsForm, AddTopicsForm
+from .forms import (
+    AddSubjectsForm,
+    AddTopicsForm as AddTopicsForm,
+    AddTopicsForm as EditTopicForm,
+)
 from django.contrib import messages
 
 
-def home(request):
-    # The home page
-    subjects = Subjects.objects.order_by("name")
-    context = {"subjects": subjects}
-    return render(request, "UTipsApp/home.html", context)
+class SubjectListView(ListView):
+    model = Subjects
+    template_name = 'UTipsApp/home.html'
+    context_object_name = 'subjects'
+    ordering = ['name']
 
 
 def about(request):
@@ -20,7 +25,8 @@ def subject_details(request, pk):
     subject = Subjects.objects.get(id=pk)
     topics = subject.info_set.order_by("-date_shared")
     context = {"subject": subject, "topics": topics}
-    return render(request, "UTipsApp/topics_list.html", context)
+    return render(request, "UTipsApp/topic_list.html", context)
+
 
 
 def topic_details(request, pk):
@@ -28,7 +34,7 @@ def topic_details(request, pk):
     topic = Info.objects.get(id=pk)
     subject = Subjects.objects.get(id=topic.subject.id)
     context = {"topic": topic, "subject": subject}
-    return render(request, "UTipsApp/topics.html", context)
+    return render(request, "UTipsApp/topic.html", context)
 
 
 def addSubject(request):
@@ -46,6 +52,7 @@ def addSubject(request):
     return render(request, "UTipsApp/add_subject.html", context)
 
 
+
 def addTopic(request):
     if request.method != "POST":
         form = AddTopicsForm()
@@ -59,3 +66,10 @@ def addTopic(request):
 
     context = {"form": form}
     return render(request, "UTipsApp/add_topic.html", context)
+
+
+class TopicEditView(UpdateView):
+    model = Info
+    fields = ['subject', 'topic', 'text', 'date_shared', 'author']
+    template_name = 'UTipsApp/edit_topic.html'
+    

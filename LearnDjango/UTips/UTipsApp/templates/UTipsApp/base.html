@@ -26,8 +26,7 @@
             <div class="collapse navbar-collapse" id="navbarToggle">
               <div class="navbar-nav mr-auto">
                 <a class="nav-item nav-link" href="{% url 'Ut-about' %}">About</a>
-                <a class="nav-item nav-link" href="{% url 'add-subject' %}">Add Subject</a>
-                <a class="nav-item nav-link" href="{% url 'add-topic' %}">Add Topic</a>  
+                {% block link %}{% endblock link %} 
               </div>
               <!-- Navbar Right Side -->
               <div class="navbar-nav">
