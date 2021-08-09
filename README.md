@@ -3,5 +3,7 @@
 <ul>
   <li>Thru the Galaxy (PyGame)
   <li>Blog Posting Site (Flask)
+  <li>Blog Posting Site (Django)
+  <li>UTipsApp (Django)
   <li>Manipulation of the Matplotlib
 <ul>
