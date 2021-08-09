@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # my_apps
     "UTipsApp.apps.UtipsappConfig",
     "crispy_forms",
+    "users.apps.UsersConfig",
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+
+LOGIN_REDIRECT_URL = 'Ut-home'
