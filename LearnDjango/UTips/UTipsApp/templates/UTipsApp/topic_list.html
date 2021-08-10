@@ -1,6 +1,8 @@
 {% extends 'UTipsApp/base.html' %} 
 {% block link %}
+{% if user.is_authenticated %}
 	<a class="nav-item nav-link" href="{% url 'add-topic' %}">Add Topic</a> 
+{% endif %}
 {% endblock link %} 
 {% block content %} 
 	{% if topics.count > 1 %}
@@ -9,16 +11,26 @@
 		<h2>({{ topics.count }}) Topic from {{ subject }}</h2>
 	{% endif %}
 	<br>
-	<br>
+	<h4>
+		<a href="{% url 'Ut-home' %}" style="color:rgb(42, 30, 53)">Home👈</a>
+	</h4>
 	<hr>
 	{% for topic in topics %}
-		<h4>
-			<a href="{% url 'topic-details' topic.id %}">{{ topic.topic }}</a>
-			<hr>
-		</h4>
+		<article class="media content-section" style="border-radius: 45px; background-color: rgba(148, 141, 212, 0.397);">
+			<img class="rounded-circle article-img" src="{{ topic.author.profile.image.url }}">
+			<div class="media-body">
+				<h3>
+					<a class="article-title" href="{% url 'topic-details' topic.id %}">{{ topic.topic }}</a>
+				</h3>
+				<div class="article-metadata">
+					Author:<a class="ml-1" href="#">{{ topic.author }}</a>
+				</div>
+			</div>
+		</article>
 	{% empty %}
 		<h3>
 			No Topics Have Been Added Yet ... 😕 
 		</h3>
 	{% endfor %}
+
 {% endblock content %}

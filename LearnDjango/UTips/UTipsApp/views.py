@@ -59,6 +59,7 @@ def addTopic(request):
     else:
         form = AddTopicsForm(request.POST)
         if form.is_valid():
+            form.instance.author = request.user
             form.save()
             topic = form.cleaned_data.get("topic")
             messages.success(request, f"The {topic} has been added successfully 👏")
