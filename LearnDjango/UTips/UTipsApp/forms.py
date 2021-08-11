@@ -12,9 +12,8 @@ class AddSubjectsForm(forms.ModelForm):
 class AddTopicsForm(forms.ModelForm):
     class Meta:
         model = Info
-        fields = ["subject", "topic", "text", "date_shared"]
+        fields = ["topic", "text", "date_shared"]
         label = {
-            "subject": "",
             "topic": "",
             "text": "",
             "date_shared": "",

@@ -12,6 +12,10 @@ body {
     margin: 0;
   }
   
+  #sidebar_info li {
+    border-radius: 15px;    
+  }
+
   .bg-steel {
     background-color: #605f8a;
   }

@@ -1,5 +1,8 @@
 {% extends "UTipsApp/base.html" %}
 {% load crispy_forms_tags %}
+{% block link %}
+    <a class="nav-item nav-link" href="{% url 'Ut-about' %}">About</a>
+{% endblock link %}
 {% block content %}
     <div class="content-section">
       <div class="media">
