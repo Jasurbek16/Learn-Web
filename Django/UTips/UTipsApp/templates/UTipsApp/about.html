@@ -2,8 +2,17 @@
 {% block content %}
     <h2>About Page</h2>
 {% endblock content %}
+<!-- {% block main-style %}
+<style class = "back-wide">
+  body{
+    background-image: url("../../../media/back_about.jpg");
+    background-position: center;
+    background-size: 100%;
+  }
+</style>
+{% endblock main-style %} -->
 {% block sidebar %}
-	<div class="col-md-4">
+	<div class="col-md-4" id = "sidebar-box">
 		<div class="content-section" style="border-radius: 8px;">
 	     		{% if user.is_authenticated %}
 		  			<h3>User's Info</h3>

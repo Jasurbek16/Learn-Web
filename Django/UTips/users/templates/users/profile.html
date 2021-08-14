@@ -3,6 +3,15 @@
 {% block link %}
     <a class="nav-item nav-link" href="{% url 'Ut-about' %}">About</a>
 {% endblock link %}
+<!-- {% block main-style %}
+<style class = "back-wide">
+  body{
+    background-image: url("../../../media/back_profile.jpg");
+    background-position: center;
+    background-size: 100%;
+  }
+</style>
+{% endblock main-style %} -->
 {% block content %}
     <div class="content-section">
       <div class="media">
@@ -12,7 +21,7 @@
           <p class="text-secondary">{{ user.email }}</p>
         </div>
       </div>
-      <form method = "POST" enctype="multipart/form-data">
+      <form method = "POST" enctype="multipart/form-data" >
         {% csrf_token %}
         <fieldset class = "form-group">
             <legend class = "border-bottom mb-4">Modify Info</legend>
