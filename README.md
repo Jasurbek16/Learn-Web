@@ -4,4 +4,5 @@
   <li>Thru the Galaxy (PyGame)
   <li>Blog Posting Site (Flask)
   <li>Blog Posting Site (Django)
+  <li>MySite (Django)
 <ul>
