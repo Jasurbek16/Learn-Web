@@ -32,3 +32,25 @@ def createProject(request):
 
     context = {'form': form}
     return render(request, 'Projects/project-form.html', context)
+
+
+def updateProject(request, pk):
+    project = Project.objects.get(id=pk)
+    form = ProjectForm(instance=project)
+
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, instance=project)
+        if form.is_valid():
+            form.save()
+            return redirect('allProjects')
+
+    context = {'form': form}
+    return render(request, 'Projects/project-form.html', context)
+
+
+def deleteProject(request, pk):
+    project = Project.objects.get(id=pk)
+    if request.method == 'POST':
+        project.delete()
+        return redirect('allProjects')
+    return render(request, 'Projects/delete.html', {'object': project})
