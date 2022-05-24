@@ -15,7 +15,7 @@ class Project(models.Model):
     source_code = models.URLField(null=True, blank=True)
     tag = models.ManyToManyField('Tag', blank=True)
     title = models.CharField(max_length=150)
-    # featured_image =
+    featured_image = models.ImageField(null=True, blank)
     vote_total = models.IntegerField(default=0)
     vote_ratio = models.IntegerField(default=0)
 
