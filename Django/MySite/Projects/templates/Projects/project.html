@@ -1,23 +1,14 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<h1>Single Project</h1>
-<hr>
 
-<h2>Project Name</h2>
-<p>{{ project.title }}</p>
-<hr>
-
-<h2>Description</h2>
-<p>{{project.description}}</p>
-<hr>
-
-<h2>Tags</h2>
+<img src="{{project.imageURL}}" style="max-width: 500px;">
+<h1>{{ project.title }}</h1>
+<p>{{project.description}}</p><br>
 {% for tag in project.tag.all %}
-    <span style="border: 1px solid #888;padding: 1em;">{{tag}}</span>
-{% endfor %}
+<span style="border: 1px solid #888;padding: 1em;">{{tag}}</span>
+{% endfor %}<br><br>
 <hr>
-
 <h2>Reviews</h2>
 {% for review in project.review_set.all %}
 <p><b>{{review.created}}</b><br><em>{{review.body}}</em></p>

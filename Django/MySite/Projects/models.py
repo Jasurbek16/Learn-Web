@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 
+# TODO: Fix the timing issue with the reviews
 
 # Table for individual projects
 class Project(models.Model):
@@ -8,16 +9,28 @@ class Project(models.Model):
     contributors = models.CharField(max_length=100, null=True, blank=True)
     date_started = models.DateTimeField(auto_now_add=True)
     description = models.TextField(null=True, blank=True)
-    id = models.UUIDField(default=uuid.uuid4, unique=True,
-                          primary_key=True, editable=False)
+    id = models.UUIDField(
+        default=uuid.uuid4, unique=True, primary_key=True, editable=False
+    )
     # owner =
     link = models.URLField(null=True, blank=True)
     source_code = models.URLField(null=True, blank=True)
-    tag = models.ManyToManyField('Tag', blank=True)
+    tag = models.ManyToManyField("Tag", blank=True)
     title = models.CharField(max_length=150)
-    featured_image = models.ImageField(null=True, blank)
+    featured_image = models.ImageField(null=True, blank=True)
     vote_total = models.IntegerField(default=0)
     vote_ratio = models.IntegerField(default=0)
+
+    @property
+    def imageURL(self):
+        """Returns the URL of the project image if exists.
+        Otherwise, returns an empty string.
+        """
+        try:
+            img_url = self.featured_image.url
+        except:
+            img_url = ""
+        return img_url
 
     def __str__(self):
         return self.title
@@ -32,27 +45,31 @@ class Projects(models.Model):
     def __str__(self):
         return self.title
 
+
 # Table for reviews
 
 
 class Review(models.Model):
 
     VOTE_TYPE = (
-        ('up', 'up'),
-        ('down', 'down'),
+        ("up", "up"),
+        ("down", "down"),
     )
 
     project = models.ForeignKey(
-        Project, on_delete=models.CASCADE, null=True, blank=True)
+        Project, on_delete=models.CASCADE, null=True, blank=True
+    )
     body = models.TextField(null=True, blank=True)
     value = models.CharField(max_length=50, choices=VOTE_TYPE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    id = models.UUIDField(default=uuid.uuid4, unique=True,
-                          primary_key=True, editable=False)
+    id = models.UUIDField(
+        default=uuid.uuid4, unique=True, primary_key=True, editable=False
+    )
 
     def __str__(self):
         return self.value
+
 
 # Table for tags
 
@@ -60,8 +77,9 @@ class Review(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
-    id = models.UUIDField(default=uuid.uuid4, unique=True,
-                          primary_key=True, editable=False)
+    id = models.UUIDField(
+        default=uuid.uuid4, unique=True, primary_key=True, editable=False
+    )
 
     def __str__(self):
         return self.name
