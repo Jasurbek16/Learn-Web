@@ -1,5 +1,24 @@
-<h1>Logo</h1>
-<a href="/">Home</a>
-<a href="#">Education</a>
-<a href="{% url 'allProjects' %}">Projects</a>
-<hr>
+{% load static %}
+<!-- Header Section -->
+<header class="header">
+    <div class="container container--narrow">
+        <a href="/" class="header__logo">
+            <img src="{% static 'images/Logo.png' %}" alt="MySite Logo" />
+        </a>
+        <nav class="header__nav">
+            <input type="checkbox" id="responsive-menu" />
+            <label for="responsive-menu" class="toggle-menu">
+                <span>Menu</span>
+                <div class="toggle-menu__lines"></div>
+            </label>
+            <ul class="header__menu">
+                <li class="header__menuItem"><a href="{% url 'allProjects' %}">Projects</a></li>
+                <li class="header__menuItem"><a href="{% url 'educationInfo' %}">Education</a></li>
+                <li class="header__menuItem"><a href="#">My Social Media</a></li>
+                <li class="header__menuItem"><a href="{% url 'create-project' %}" class="btn btn--sub">Add a Project</a>
+                </li>
+                <!-- <li class="header__menuItem"><a href="#" class="btn btn--sub">Login/Sign Up</a></li> -->
+            </ul>
+        </nav>
+    </div>
+</header>

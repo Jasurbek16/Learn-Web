@@ -1,3 +1,4 @@
+from email.policy import default
 import uuid
 from django.db import models
 
@@ -15,9 +16,9 @@ class Project(models.Model):
     # owner =
     link = models.URLField(null=True, blank=True)
     source_code = models.URLField(null=True, blank=True)
-    tag = models.ManyToManyField("Tag", blank=True)
+    tags = models.ManyToManyField("Tag", blank=True)
     title = models.CharField(max_length=150)
-    featured_image = models.ImageField(null=True, blank=True)
+    featured_image = models.ImageField(null=True, blank=True, default="default.jpg")
     vote_total = models.IntegerField(default=0)
     vote_ratio = models.IntegerField(default=0)
 
