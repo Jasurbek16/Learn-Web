@@ -1,25 +1,68 @@
-{% extends 'main.html' %}
+{% extends 'main.html' %} {% load static %} {% block content %}
 
+<section class="home s1">
+  <div class="main-container">
+    <div class="greeting-wrapper">
+      <h1>Hi there, Jasurbek Mamurov's here!</h1>
+      <div class="greeting-info-wrapper">
+        <p style="font-size: 20px">An Artificial Intelligence Enthusiast</p>
+      </div>
+    </div>
 
+    <div class="intro-wrapper">
+      <div class="nav-wrapper">
+        <div class="info-sign">
+          <img
+            src="{% static 'images/info-sign.png' %}"
+            alt="information sign"
+          />
+        </div>
+        <div class="window-buttons-wrapper">
+          <div id="button1" class="window-buttons"></div>
+          <div id="button2" class="window-buttons"></div>
+          <div id="button3" class="window-buttons"></div>
+        </div>
+      </div>
+      <div class="left-column">
+        <div class="theme-options-wrapper">
+          <div id="light-mode" class="theme-dot"></div>
+          <div id="dark-mode" class="theme-dot"></div>
+          <div id="blue-mode" class="theme-dot"></div>
+          <div id="purple-mode" class="theme-dot"></div>
+        </div>
+      </div>
+      <div class="center-column">
+        <img
+          id="profile-picture"
+          src="{% static 'images/Jasurbek.jpg' %}"
+          alt="My personal image"
+        />
+        <h5 style="text-align: center; line-height: 0">
+          👈🏼 Personalize theme from the left side...
+        </h5>
+        <p id="settings-note">
+          The option you choose would be saved for <br />
+          your next visit.
+        </p>
+      </div>
+      <div class="right-column">right-cloumn</div>
+    </div>
+  </div>
+</section>
 
-{% block content %}
-<h1>Home</h1>
-<p>
-    Lntum odio quis tincidunt tempus. 
-    Aliquam consequat elementum nisl, non tempus ligula faucibus a. 
-    Aenean eget mauris in ex facilisis finibus vitae vel nisi. Donec 
-    et metus quis mauris placerat pellentesque. Ut sed ante id velit 
-    elementum congue in maximus odio. Sed efficitur faucibus urna, sit 
-    amet aliquet ligula lacinia ut. Maecenas mollis purus at laoreet malesuada.
-    Nunc eu felis eget elit commodo fringilla non ac lacus. Duis ornare vestibulum 
-    luctus. Fusce imperdiet lacus quis nulla placerat interdum. Vivamus rhoncus semper 
-    augue non pulvinar. Ut vel ligula ipsum. Donec nec arcu nec turpis rutrum tincidunt et ut ante. 
-    Nulla tortor ligula, tempor et sem quis, tincidunt dignissim nisi.
-    Phasellus in quam sed ex gravida pulvinar. Nulla venenatis metus vel aliquet laoreet. 
-    Curabitur imperdiet volutpat diam, et interdum eros rutrum eget. Pellentesque leo est, 
-    dignissim vel viverra non, congue vel velit. Suspendisse potenti. Pellentesque et pulvinar purus. 
-    Duis lobortis quam sit amet risus maximus, a efficitur velit tincidunt. In hac habitasse platea dictumst. 
-    Donec viverra sem tellus. Curabitur condimentum felis id enim porta accumsan. Nunc volutpat lacus quam, 
-    at scelerisque lorem pellentesque ac. Morbi augue arcu, malesuada vel tortor nec, interdum commodo est.
-</p>
+<section class="s2">
+  <div class="main-container">Who am I?</div>
+</section>
+
+<section class="s1">
+  <div class="main-container">Recent activities</div>
+</section>
+
+<section class="s2">
+  <div class="main-container">Last posts</div>
+</section>
+
+<section class="s1">
+  <div class="main-container">Want to talk with me?</div>
+</section>
 {% endblock content %}
