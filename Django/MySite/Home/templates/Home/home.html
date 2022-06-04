@@ -27,8 +27,8 @@
         <div class="theme-options-wrapper">
           <div id="light-mode" class="theme-dot"></div>
           <div id="dark-mode" class="theme-dot"></div>
-          <div id="blue-mode" class="theme-dot"></div>
           <div id="purple-mode" class="theme-dot"></div>
+          <div id="blue-mode" class="theme-dot"></div>
         </div>
       </div>
       <div class="center-column">
@@ -37,21 +37,88 @@
           src="{% static 'images/Jasurbek.jpg' %}"
           alt="My personal image"
         />
+        <br /><br />
         <h5 style="text-align: center; line-height: 0">
-          👈🏼 Personalize theme from the left side...
+          👈🏼 Personalize the theme
         </h5>
-        <p id="settings-note">
-          The option you choose would be saved for <br />
-          your next visit.
-        </p>
+        <br /><br />
       </div>
-      <div class="right-column">right-cloumn</div>
+      <div class="right-column">
+        <div id="preview-shadow">
+          <div id="preview">
+            <div id="corner-tl" class="corner"></div>
+            <div id="corner-tr" class="corner"></div>
+            <h3>Currently</h3>
+            <br />
+            <p>
+              I am a student, learning Computer Science, exploring the world of
+              AI, posting tech-stuff, and doing projects.
+            </p>
+            <div id="corner-bl" class="corner"></div>
+            <div id="corner-br" class="corner"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="s2">
-  <div class="main-container">Who am I?</div>
+  <div class="main-container">
+    <div class="about-wrapper">
+      <div class="who-am-i">
+        <h4>Who am I?</h4>
+        <p>
+          A student, follower, supporter, and an enthusiast living in
+          Uzbekistan. Passionate about Computer Science and Engineering.
+        </p>
+        <br />
+        <p>
+          At the moment, entering to the world of Artificial Intelligence and
+          Machine Learning. Continuing my journey as a co-founder of ML
+          Community. Planed to reach my aims and make my dreams come true with
+          the help of technology. Let's bring future together, today!
+        </p>
+        <p>BTW, let's look at my resume and download it:</p>
+        <a target="_blank" href="{% static 'resume.pdf' %}"
+          >👉🏻 Yeap, it is right here!</a
+        >
+      </div>
+
+      <div class="skills">
+        <h4>What do I have and know?</h4>
+        <p>
+          Skills at coding websites like this by building the fundament in the
+          backend side and prettifying in the front. Furthermore, I can get most
+          out of the data by using my data manipulation skills in Python and its
+          Data Science libraries. So, let's look at what tools I can handle...
+        </p>
+        <br />
+        <div id="skills-list">
+          <ul>
+            <li>Python</li>
+            <li>C++</li>
+            <li>Java</li>
+            <li>Microsoft SQL Server</li>
+          </ul>
+
+          <ul>
+            <li>Pandas</li>
+            <li>Matplotlib</li>
+            <li>Numpy</li>
+            <li>Scikit-learn</li>
+          </ul>
+
+          <ul>
+            <li>Django</li>
+            <li>HTML/CSS</li>
+            <li>Data Structures</li>
+            <li>System Programming</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="s1">
