@@ -325,6 +325,17 @@ h6 {
   padding: 10px;
 }
 
+.activities-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 280px);
+}
+
+.thumbnail {
+  display: block;
+  width: 100%;
+  height: 180px;
+}
+
 @media screen and (max-width: 1200px) {
   .main-container {
     width: 85%;

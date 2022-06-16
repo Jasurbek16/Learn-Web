@@ -1,8 +1,3 @@
-## My Projects in Python
-<h3>A List of Projects</h3>
-<ul>
-  <li>Thru the Galaxy (PyGame)
-  <li>Blog Posting Site (Flask)
-  <li>Blog Posting Site (Django)
-  <li>MySite (Django)
-<ul>
+# Learn-Web
+
+This repository includes all of the codes used while learning web programming.
