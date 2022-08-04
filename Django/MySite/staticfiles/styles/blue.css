@@ -1,0 +1,20 @@
+:root {
+  --color-sub: #2d2d39;
+
+  --leftColumnColor: #15202b;
+
+  --homeMainColor: #15202b;
+  --homeSecondaryColor: #192734;
+
+  --homeBorderColor: #164d56;
+
+  --homeMainText: #fff;
+  --homeSecondaryText: #eeeeee;
+
+  --themeDotBorder: black;
+
+  --previewBg: rgb(25, 39, 52, 0.8);
+  --previewShadow: #111921;
+
+  --buttonColor: #17a2b8;
+}

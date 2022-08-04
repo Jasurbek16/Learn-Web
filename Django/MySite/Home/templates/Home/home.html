@@ -3,9 +3,9 @@
 <section class="home s1">
   <div class="main-container">
     <div class="greeting-wrapper">
-      <h1 style="font-size: 50px">Hi there, Jasurbek Mamurov's here!</h1>
+      <h1 id="intro-text-1">Hi there, MJey's here!</h1>
       <div class="greeting-info-wrapper">
-        <p style="font-size: 20px">An Artificial Intelligence Enthusiast</p>
+        <p id="intro-text-2">An Artificial Intelligence Enthusiast</p>
       </div>
     </div>
 
@@ -68,6 +68,11 @@
     <div class="about-wrapper">
       <div class="who-am-i">
         <h4>Who am I?</h4>
+        <br />
+        <p>
+          <i><b>~Jasurbek Mamurov</b></i>
+        </p>
+        <br />
         <p>
           A student, follower, supporter, and an enthusiast living in
           Uzbekistan. Passionate about Computer Science and Engineering.
@@ -121,57 +126,83 @@
   </div>
 </section>
 
+<section class="s2">
+  <div class="main-container">
+    <br />
+    <h3 style="text-align: center">Latest posts</h3>
+    <br />
+    <div></div>
+  </div>
+</section>
+
 <section class="s1">
   <div class="main-container">
-    <br /><br />
+    <br />
     <h3 style="text-align: center">Recent Activities</h3>
+    <br />
     <div class="activities-wrapper">
-      <div class="post">
-        <img
-          class="thumbnail"
-          src="{% static 'images/default.jpg'%}"
-          alt="post#1image"
-        />
-        <div class="post-preview">
-          <h6 class="post-title">Post Title</h6>
-          <p class="post-intro">
-            There would be a sentence. Yeap, this text does not mean anything.
-          </p>
+      <div>
+        <div class="post">
+          <img
+            class="thumbnail"
+            src="{% static 'images/SummerUniversity.jpg'%}"
+            alt="first activity image"
+          />
+          <div class="post-preview">
+            <h6 class="post-title">Summer University (Летний Университет)</h6>
+            <p class="post-intro">
+              Have been invited to participate in the Summer University project
+              in Tyumen, Russian Federation.
+            </p>
+            <br />
+            <a href="activity.html">Need more?</a>
+          </div>
         </div>
       </div>
-      <div class="post">
-        <img
-          class="thumbnail"
-          src="{% static 'images/default.jpg'%}"
-          alt="post#2image"
-        />
-        <div class="post-preview">
-          <h6 class="post-title">Post Title</h6>
-          <p class="post-intro">
-            There would be a sentence. Yeap, this text does not mean anything.
-          </p>
-      </div>
-      <div class="post">
-        <img
-        class="thumbnail"
-        src="{% static 'images/default.jpg'%}"
-        alt="post#3image"
-      />
-      <div class="post-preview">
-        <h6 class="post-title">Post Title</h6>
-        <p class="post-intro">
-          There would be a sentence. Yeap, this text does not mean anything.
-        </p>
+
+      <div>
+        <div class="post">
+          <img
+            class="thumbnail"
+            src="{% static 'images/Almanax.jpg'%}"
+            alt="second activity image"
+          />
+          <div class="post-preview">
+            <h6 class="post-title">Almanax (Ziyolilar)</h6>
+            <p class="post-intro">
+              Have been listed as one of the TOP-100 students in Uzbekistan and
+              awarded with a book (Ziyolilar) that contains all of the TOP-100
+              students.
+            </p>
+            <br />
+            <a href="activity.html">Need more?</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <section class="s2">
-  <div class="main-container">Last posts</div>
-</section>
+  <div class="main-container">
+    <br />
+    <h3 style="text-align: center">Want to talk with me?</h3>
+    <br />
+    <form id="contact-form">
+      <label>Name</label>
+      <input class="input-field" type="text" name="name" />
 
-<section class="s1">
-  <div class="main-container">Want to talk with me?</div>
+      <label>Subject</label>
+      <input class="input-field" type="text" name="subject" />
+
+      <label>Email</label>
+      <input class="input-field" type="text" name="email" />
+
+      <label>Message</label>
+      <textarea class="input-field" type="text" name="message"></textarea>
+
+      <input id="submit-btn" type="submit" value="Contact" />
+    </form>
+  </div>
 </section>
 {% endblock content %}
