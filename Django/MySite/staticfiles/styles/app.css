@@ -27,6 +27,10 @@ body {
   margin: 0;
 }
 
+body * {
+  transition: 0.5s;
+}
+
 p {
   color: var(--homeSecondaryText);
 }
@@ -247,8 +251,8 @@ h6 {
   border: 3px solid var(--themeDotBorder);
 }
 
-#dark-mode {
-  background-color: #202124;
+#green-mode {
+  background-color: #669966;
 }
 
 #blue-mode {
@@ -418,7 +422,7 @@ h6 {
   padding-bottom: 10px;
   color: #fff;
   background-color: var(--buttonColor);
-  border: 1px solid white;
+  border: 1px solid black;
   border-radius: 10px;
   font-size: 20px;
 }

@@ -2,9 +2,15 @@
 {% load static %}
 <html>
   <head>
+    <title>Jasurbek Mamurov</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Jasurbek Mamurov</title>
+    <link
+      rel="shortcut icon"
+      type="image/ico"
+      href="{% static '/favicon.ico' %}"
+    />
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,20 +26,17 @@
     />
     <!-- Mumble UI -->
     <link rel="stylesheet" href="{% static 'uikit/styles/uikit.css' %}" />
-
-    <link rel="stylesheet" href="{% static 'styles/app.css' %}" />
+    <link rel="stylesheet" type="text/css" href="/staticfiles/styles/app.css" />
+    <link id="theme-style" rel="stylesheet" type="text/css" href="" />
     <!-- <script src='main.js' ></script> -->
-    <link
-      id="theme-style"
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'styles/blue.css' %}"
-    />
-    <style></style>
   </head>
 
   <body>
     {% include 'navbar.html' %} {% block content %} {% endblock content %}
     {%include 'footer.html' %}
+    <script
+      type="text/javascript"
+      src="{% static 'styles/script.js' %}"
+    ></script>
   </body>
 </html>
